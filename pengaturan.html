@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengaturan</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <img src="img/logotai.png" alt="Logo Perusahaan" class="logo">
+            <h2>Administrator</h2>
+            <hr>
+        </div>
+        
+        <!-- Menu Dashboard di Paling Atas -->
+        <ul class="dashboard-menu">
+            <li><a href="dashboard.html"><i class="fas fa-home"></i>Dashboard</a></li>
+        </ul>
+        
+        <!-- Konten Sidebar -->
+        <div class="sidebar-content">
+            <!-- Bagian Menu Karyawan -->
+            <ul class="menu-section">
+                <h3>Menu Karyawan</h3>
+                <li><a href="datakaryawan.html"><i class="fas fa-users"></i>Data Karyawan</a></li>
+                <li><a href="jabatan.html"><i class="fas fa-briefcase"></i>Jabatan</a></li>
+                <li><a href="divisi.html"><i class="fas fa-building"></i>Divisi</a></li>
+            </ul>
+            <hr class="section-divider">
+            
+            <!-- Bagian Menu Absensi -->
+            <ul class="menu-section">
+                <h3>Menu Absensi</h3>
+                <li><a href="absensi.html"><i class="fas fa-calendar-check"></i>Absensi</a></li>
+                <li><a href="izin.html"><i class="fas fa-clock"></i>Izin</a></li>
+                <li><a href="lembur.html"><i class="fas fa-business-time"></i>Lembur</a></li>
+            </ul>
+            <hr class="section-divider">
+            
+            <!-- Bagian Pengaturan dan Logout -->
+            <ul class="bottom-section">
+                <li><a href="pengaturan.html"><i class="fas fa-cog"></i>Pengaturan</a></li>
+                <li><a href="index.html"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="main-content">
+        <header>
+            <h1>Pengaturan</h1>
+        </header>
+        
+        <div class="content">
+            <!-- Pengaturan Profil -->
+            <section class="settings-section">
+                <h2>Pengaturan Profil</h2>
+                <form>
+                    <label for="nama">Nama Lengkap:</label>
+                    <input type="text" id="nama" name="nama" placeholder="Nama Lengkap">
+                    
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" placeholder="Email">
+                    
+                    <label for="phone">Nomor Telepon:</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Nomor Telepon">
+                    
+                    <button type="submit">Simpan Perubahan</button>
+                </form>
+            </section>
+            
+            <hr class="section-divider">
+            
+            <!-- Preferensi Tampilan -->
+            <section class="settings-section">
+                <h2>Preferensi Tampilan</h2>
+                <form>
+                    <label for="theme">Tema:</label>
+                    <select id="theme" name="theme">
+                        <option value="light">Terang</option>
+                        <option value="dark">Gelap</option>
+                    </select>
+                    
+                    <label for="language">Bahasa:</label>
+                    <select id="language" name="language">
+                        <option value="id">Indonesia</option>
+                        <option value="en">English</option>
+                    </select>
+                    
+                    <button type="submit">Simpan Preferensi</button>
+                </form>
+            </section>
+            
+            <hr class="section-divider">
+            
+            <!-- Pengaturan Keamanan -->
+            <section class="settings-section">
+                <h2>Pengaturan Keamanan</h2>
+                <form>
+                    <label for="current-password">Password Saat Ini:</label>
+                    <input type="password" id="current-password" name="current-password" placeholder="Password Saat Ini">
+                    
+                    <label for="new-password">Password Baru:</label>
+                    <input type="password" id="new-password" name="new-password" placeholder="Password Baru">
+                    
+                    <label for="confirm-password">Konfirmasi Password Baru:</label>
+                    <input type="password" id="confirm-password" name="confirm-password" placeholder="Konfirmasi Password Baru">
+                    
+                    <button type="submit">Ubah Password</button>
+                </form>
+            </section>
+        </div>
+    </div>
+</body>
+</html>

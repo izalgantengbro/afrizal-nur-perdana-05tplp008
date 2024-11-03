@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Data Divisi</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <img src="img/logotai.png" alt="Logo Perusahaan" class="logo">
+            <h2>Administrator</h2>
+            <hr>
+        </div>
+        
+        <!-- Menu Dashboard di Paling Atas -->
+        <ul class="dashboard-menu">
+            <li><a href="dashboard.html"><i class="fas fa-home"></i>Dashboard</a></li>
+        </ul>
+        
+        <!-- Konten Sidebar -->
+        <div class="sidebar-content">
+            <!-- Bagian Menu Karyawan -->
+            <ul class="menu-section">
+                <h3>Menu Karyawan</h3>
+                <li><a href="datakaryawan.html"><i class="fas fa-users"></i>Data Karyawan</a></li>
+                <li><a href="jabatan.html"><i class="fas fa-briefcase"></i>Jabatan</a></li>
+                <li><a href="divisi.html"><i class="fas fa-building"></i>Divisi</a></li>
+            </ul>
+            <hr class="section-divider">
+            
+            <!-- Bagian Menu Absensi -->
+            <ul class="menu-section">
+                <h3>Menu Absensi</h3>
+                <li><a href="absensi.html"><i class="fas fa-calendar-check"></i>Absensi</a></li>
+                <li><a href="izin.html"><i class="fas fa-clock"></i>Izin</a></li>
+                <li><a href="lembur.html"><i class="fas fa-business-time"></i>Lembur</a></li>
+            </ul>
+            <hr class="section-divider">
+            
+            <!-- Bagian Pengaturan dan Logout -->
+            <ul class="bottom-section">
+                <li><a href="#"><i class="fas fa-cog"></i>Pengaturan</a></li>
+                <li><a href="index.html"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="main-content">
+        <header>
+            <h1>Tambah Data Divisi</h1>
+        </header>
+        <div class="content">
+            <!-- Form tambah data divisi -->
+            <form id="formTambahDivisi">
+                <label for="kodeDivisi">Kode Divisi:</label>
+                <input type="text" id="kodeDivisi" name="kodeDivisi" readonly>
+                
+                <label for="namaDivisi">Nama Divisi:</label>
+                <input type="text" id="namaDivisi" name="namaDivisi" required>
+                
+                <button type="button" onclick="simpanDataDivisi()">Simpan</button>
+                <a href="divisi.html" class="button-cancel">Batal</a>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Fungsi untuk mengisi kode divisi secara otomatis
+        function generateKodeDivisi() {
+            var dataDivisi = JSON.parse(localStorage.getItem('dataDivisi')) || [];
+            return 'DV' + (dataDivisi.length + 1).toString().padStart(3, '0');
+        }
+
+        // Tampilkan kode divisi otomatis saat halaman dimuat
+        document.getElementById("kodeDivisi").value = generateKodeDivisi();
+
+        // Fungsi untuk menyimpan data divisi
+        function simpanDataDivisi() {
+            var kodeDivisi = document.getElementById("kodeDivisi").value;
+            var namaDivisi = document.getElementById("namaDivisi").value;
+
+            // Ambil data divisi dari localStorage
+            var dataDivisi = JSON.parse(localStorage.getItem('dataDivisi')) || [];
+
+            // Tambah data baru ke array
+            dataDivisi.push({ kodeDivisi, namaDivisi });
+
+            // Simpan kembali ke localStorage
+            localStorage.setItem('dataDivisi', JSON.stringify(dataDivisi));
+
+            // Arahkan ke halaman divisi
+            window.location.href = 'divisi.html';
+        }
+    </script>
+</body>
+</html>

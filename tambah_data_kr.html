@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Data Karyawan</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <img src="img/logotai.png" alt="Logo Perusahaan" class="logo">
+            <h2>Administrator</h2>
+            <hr>
+        </div>
+        
+        <!-- Menu Dashboard di Paling Atas -->
+        <ul class="dashboard-menu">
+            <li><a href="dashboard.html"><i class="fas fa-home"></i>Dashboard</a></li>
+        </ul>
+        
+        <!-- Konten Sidebar -->
+        <div class="sidebar-content">
+            <!-- Bagian Menu Karyawan -->
+            <ul class="menu-section">
+                <h3>Menu Karyawan</h3>
+                <li><a href="datakaryawan.html"><i class="fas fa-users"></i>Data Karyawan</a></li>
+                <li><a href="jabatan.html"><i class="fas fa-briefcase"></i>Jabatan</a></li>
+                <li><a href="divisi.html"><i class="fas fa-building"></i>Divisi</a></li>
+            </ul>
+            <hr class="section-divider">
+            
+            <!-- Bagian Menu Absensi -->
+            <ul class="menu-section">
+                <h3>Menu Absensi</h3>
+                <li><a href="absensi.html"><i class="fas fa-calendar-check"></i>Absensi</a></li>
+                <li><a href="izin.html"><i class="fas fa-clock"></i>Izin</a></li>
+                <li><a href="lembur.html"><i class="fas fa-business-time"></i>Lembur</a></li>
+            </ul>
+            <hr class="section-divider">
+            
+            <!-- Bagian Pengaturan dan Logout -->
+            <ul class="bottom-section">
+                <li><a href="#"><i class="fas fa-cog"></i>Pengaturan</a></li>
+                <li><a href="index.html"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="main-content">
+        <header>
+            <h1>Tambah Data Karyawan</h1>
+        </header>
+        <div class="content">
+            <!-- Form tambah data karyawan -->
+            <form id="formTambahKaryawan">
+                <label for="nama">Nama:</label>
+                <input type="text" id="nama" name="nama" required>
+                
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="alamat">Alamat:</label>
+                <input type="text" id="alamat" name="alamat" required>
+                
+                <label for="jabatan">Jabatan:</label>
+                <input type="text" id="jabatan" name="jabatan" required>
+                
+                <button type="button" onclick="simpanDataKaryawan()">Simpan</button>
+                <a href="datakaryawan.html" class="button-cancel">Batal</a>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function simpanDataKaryawan() {
+            var nama = document.getElementById("nama").value;
+            var email = document.getElementById("email").value;
+            var alamat = document.getElementById("alamat").value;
+            var jabatan = document.getElementById("jabatan").value;
+
+            // Ambil data karyawan dari localStorage
+            var dataKaryawan = JSON.parse(localStorage.getItem('dataKaryawan')) || [];
+
+            // Generate kode unik untuk karyawan baru
+            var kode = 'KR' + (dataKaryawan.length + 1).toString().padStart(3, '0');
+
+            // Tambah data baru ke array
+            dataKaryawan.push({ kode, nama, email, alamat, jabatan });
+
+            // Simpan kembali ke localStorage
+            localStorage.setItem('dataKaryawan', JSON.stringify(dataKaryawan));
+
+            // Arahkan ke halaman data karyawan
+            window.location.href = 'datakaryawan.html';
+        }
+    </script>
+</body>
+</html>

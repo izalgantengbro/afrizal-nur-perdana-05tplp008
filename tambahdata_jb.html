@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Data Jabatan</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <img src="img/logotai.png" alt="Logo Perusahaan" class="logo">
+            <h2>Administrator</h2>
+            <hr>
+        </div>
+        
+        <!-- Menu Dashboard di Paling Atas -->
+        <ul class="dashboard-menu">
+            <li><a href="dashboard.html"><i class="fas fa-home"></i>Dashboard</a></li>
+        </ul>
+        
+        <!-- Konten Sidebar -->
+        <div class="sidebar-content">
+            <!-- Bagian Menu Karyawan -->
+            <ul class="menu-section">
+                <h3>Menu Karyawan</h3>
+                <li><a href="datakaryawan.html"><i class="fas fa-users"></i>Data Karyawan</a></li>
+                <li><a href="jabatan.html"><i class="fas fa-briefcase"></i>Jabatan</a></li>
+                <li><a href="divisi.html"><i class="fas fa-building"></i>Divisi</a></li>
+            </ul>
+            <hr class="section-divider">
+            
+            <!-- Bagian Menu Absensi -->
+            <ul class="menu-section">
+                <h3>Menu Absensi</h3>
+                <li><a href="absensi.html"><i class="fas fa-calendar-check"></i>Absensi</a></li>
+                <li><a href="izin.html"><i class="fas fa-clock"></i>Izin</a></li>
+                <li><a href="lembur.html"><i class="fas fa-business-time"></i>Lembur</a></li>
+            </ul>
+            <hr class="section-divider">
+            
+            <!-- Bagian Pengaturan dan Logout -->
+            <ul class="bottom-section">
+                <li><a href="#"><i class="fas fa-cog"></i>Pengaturan</a></li>
+                <li><a href="index.html"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="main-content">
+        <header>
+            <h1>Tambah Data Jabatan</h1>
+        </header>
+        <div class="content">
+            <!-- Form tambah data jabatan -->
+            <form id="formTambahJabatan">
+                <label for="kodeJabatan">Kode Jabatan:</label>
+                <input type="text" id="kodeJabatan" name="kodeJabatan" readonly>
+                
+                <label for="jabatan">Jabatan:</label>
+                <input type="text" id="jabatan" name="jabatan" required>
+                
+                <button type="button" onclick="simpanDataJabatan()">Simpan</button>
+                <a href="jabatan.html" class="button-cancel">Batal</a>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Fungsi untuk mengisi kode jabatan secara otomatis
+        function generateKodeJabatan() {
+            var dataJabatan = JSON.parse(localStorage.getItem('dataJabatan')) || [];
+            return 'JB' + (dataJabatan.length + 1).toString().padStart(3, '0');
+        }
+
+        // Tampilkan kode jabatan otomatis saat halaman dimuat
+        document.getElementById("kodeJabatan").value = generateKodeJabatan();
+
+        // Fungsi untuk menyimpan data jabatan
+        function simpanDataJabatan() {
+            var kodeJabatan = document.getElementById("kodeJabatan").value;
+            var jabatan = document.getElementById("jabatan").value;
+
+            // Ambil data jabatan dari localStorage
+            var dataJabatan = JSON.parse(localStorage.getItem('dataJabatan')) || [];
+
+            // Tambah data baru ke array
+            dataJabatan.push({ kodeJabatan, jabatan });
+
+            // Simpan kembali ke localStorage
+            localStorage.setItem('dataJabatan', JSON.stringify(dataJabatan));
+
+            // Arahkan ke halaman jabatan
+            window.location.href = 'jabatan.html';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Absensi</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <img src="img/logotai.png" alt="Logo Perusahaan" class="logo">
+            <h2>Administrator</h2>
+            <hr>
+        </div>
+        
+        <!-- Menu Dashboard di Paling Atas -->
+        <ul class="dashboard-menu">
+            <li><a href="dashboard.html"><i class="fas fa-home"></i>Dashboard</a></li>
+        </ul>
+        
+        <!-- Konten Sidebar -->
+        <div class="sidebar-content">
+            <!-- Bagian Menu Karyawan -->
+            <ul class="menu-section">
+                <h3>Menu Karyawan</h3>
+                <li><a href="datakaryawan.html"><i class="fas fa-users"></i>Data Karyawan</a></li>
+                <li><a href="jabatan.html"><i class="fas fa-briefcase"></i>Jabatan</a></li>
+                <li><a href="divisi.html"><i class="fas fa-building"></i>Divisi</a></li>
+            </ul>
+            <hr class="section-divider">
+            
+            <!-- Bagian Menu Absensi -->
+            <ul class="menu-section">
+                <h3>Menu Absensi</h3>
+                <li><a href="absensi.html"><i class="fas fa-calendar-check"></i>Absensi</a></li>
+                <li><a href="izin.html"><i class="fas fa-clock"></i>Izin</a></li>
+                <li><a href="lembur.html"><i class="fas fa-business-time"></i>Lembur</a></li>
+            </ul>
+            <hr class="section-divider">
+            
+            <!-- Bagian Pengaturan dan Logout -->
+            <ul class="bottom-section">
+                <li><a href="pengaturan.html"><i class="fas fa-cog"></i>Pengaturan</a></li>
+                <li><a href="index.html"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="main-content">
+        <header>
+            <h1>Data Absensi</h1>
+        </header>
+        <div class="content">
+            <h2>Daftar Absensi</h2>
+
+            <!-- Tombol tambah data absensi -->
+            <a href="tambahdata_ab.html" class="button-add">
+                <i class="fas fa-plus-circle"></i> Tambah Data Absensi
+            </a>
+
+            <!-- Tabel data absensi -->
+            <table id="tabelAbsensi">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>Tanggal</th>
+                        <th>Jam Absen</th>
+                        <th>Jam Keluar</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data absensi akan ditambahkan di sini -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var dataAbsensi = JSON.parse(localStorage.getItem('dataAbsensi')) || [];
+            var tableBody = document.getElementById('tabelAbsensi').getElementsByTagName('tbody')[0];
+
+            dataAbsensi.forEach((absen, index) => {
+                var row = tableBody.insertRow();
+                
+                // Kolom No
+                row.insertCell(0).innerHTML = index + 1;
+                
+                // Kolom Data Absensi
+                row.insertCell(1).innerHTML = absen.nama;
+                row.insertCell(2).innerHTML = absen.tanggal;
+                row.insertCell(3).innerHTML = absen.jamAbsen;
+                row.insertCell(4).innerHTML = absen.jamKeluar;
+                
+                // Tombol Hapus
+                var cellAksi = row.insertCell(5);
+                var btnHapus = document.createElement("button");
+                btnHapus.innerHTML = "Hapus";
+                btnHapus.onclick = function() {
+                    hapusAbsensi(index);
+                };
+                cellAksi.appendChild(btnHapus);
+            });
+        });
+
+        function hapusAbsensi(index) {
+            var dataAbsensi = JSON.parse(localStorage.getItem('dataAbsensi')) || [];
+            dataAbsensi.splice(index, 1);
+            localStorage.setItem('dataAbsensi', JSON.stringify(dataAbsensi));
+            location.reload();
+        }
+    </script>
+</body>
+</html>

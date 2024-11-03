@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jabatan</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <img src="img/logotai.png" alt="Logo Perusahaan" class="logo">
+            <h2>Administrator</h2>
+            <hr>
+        </div>
+        
+        <!-- Menu Dashboard di Paling Atas -->
+        <ul class="dashboard-menu">
+            <li><a href="dashboard.html"><i class="fas fa-home"></i>Dashboard</a></li>
+        </ul>
+        
+        <!-- Konten Sidebar -->
+        <div class="sidebar-content">
+            <!-- Bagian Menu Karyawan -->
+            <ul class="menu-section">
+                <h3>Menu Karyawan</h3>
+                <li><a href="datakaryawan.html"><i class="fas fa-users"></i>Data Karyawan</a></li>
+                <li><a href="jabatan.html"><i class="fas fa-briefcase"></i>Jabatan</a></li>
+                <li><a href="divisi.html"><i class="fas fa-building"></i>Divisi</a></li>
+            </ul>
+            <hr class="section-divider">
+            
+            <!-- Bagian Menu Absensi -->
+            <ul class="menu-section">
+                <h3>Menu Absensi</h3>
+                <li><a href="absensi.html"><i class="fas fa-calendar-check"></i>Absensi</a></li>
+                <li><a href="izin.html"><i class="fas fa-clock"></i>Izin</a></li>
+                <li><a href="lembur.html"><i class="fas fa-business-time"></i>Lembur</a></li>
+            </ul>
+            <hr class="section-divider">
+            
+            <!-- Bagian Pengaturan dan Logout -->
+            <ul class="bottom-section">
+                <li><a href="pengaturan.html"><i class="fas fa-cog"></i>Pengaturan</a></li>
+                <li><a href="index.html"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="main-content">
+        <header>
+            <h1>Jabatan</h1>
+        </header>
+        <div class="content">
+            <h2>Informasi Jabatan</h2>
+           
+
+            <!-- Tombol Tambah Data -->
+            <a href="tambahdata_jb.html" class="button-add">
+                <i class="fas fa-plus-circle"></i> Tambah Data
+            </a>
+            <!-- Tabel Data Jabatan -->
+            <table border="1" cellpadding="10" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Kode Jabatan</th>
+                        <th>Jabatan</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="jabatanTable">
+                    <!-- Baris data jabatan akan ditambahkan secara dinamis -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <script>
+        // Fungsi untuk memuat data jabatan dari localStorage
+        function loadDataJabatan() {
+            const jabatanTable = document.getElementById("jabatanTable");
+            jabatanTable.innerHTML = ""; // Hapus isi tabel sebelumnya
+    
+            // Ambil data dari localStorage
+            const dataJabatan = JSON.parse(localStorage.getItem('dataJabatan')) || [];
+    
+            // Tambahkan data ke tabel
+            dataJabatan.forEach((data, index) => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${data.kodeJabatan}</td>
+                    <td>${data.jabatan}</td>
+                    <td><button onclick="deleteRow(${index})">Hapus</button></td>
+                `;
+                jabatanTable.appendChild(row);
+            });
+        }
+    
+        // Fungsi untuk menghapus baris data
+        function deleteRow(index) {
+            let dataJabatan = JSON.parse(localStorage.getItem('dataJabatan')) || [];
+            dataJabatan.splice(index, 1); // Hapus item berdasarkan indeks
+            localStorage.setItem('dataJabatan', JSON.stringify(dataJabatan)); // Simpan kembali ke localStorage
+            loadDataJabatan(); // Perbarui tampilan tabel
+        }
+    
+        // Panggil fungsi loadDataJabatan() saat halaman dimuat
+        window.onload = loadDataJabatan;
+    </script>
+    
+</body>
+</html>

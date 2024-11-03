@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #000000, #1500ff, #cacaca); /* Warna gradien modern */
+            margin: 0;
+            animation: fadeIn 1s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .login-container {
+            width: 320px;
+            padding: 20px 30px;
+            background: #fff;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            text-align: center;
+            animation: slideIn 0.6s ease-in-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .login-container:hover {
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+        }
+
+        .login-container img {
+            width: 90px;
+            height: 90px;
+            margin-bottom: 15px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .login-container h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .login-container input[type="text"]:focus,
+        .login-container input[type="password"]:focus {
+            border-color: #7b4397;
+            box-shadow: 0 0 8px rgba(123, 67, 151, 0.5);
+            outline: none;
+        }
+
+        .login-container button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(90deg, #7b4397, #dc2430);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .login-container button:hover {
+            background: linear-gradient(90deg, #6a1b9a, #c31432);
+            transform: scale(1.05);
+        }
+
+        .login-container .bypass {
+            background: #4285F4;
+            margin-top: 10px;
+        }
+
+        .login-container .bypass:hover {
+            background: #357ae8;
+            transform: translateY(-2px);
+        }
+
+        .login-container p {
+            color: #888;
+            font-size: 0.9rem;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+
+<div class="login-container">
+    <img src="img/logotai.png" alt="Logo Perusahaan">
+    <h2>Login</h2>
+    <p>username: afrizal || password: 221011401828</p>
+    <p>Masuk tanpa login juga bisa langsung ke dashboard</p>
+    <form id="loginForm">
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button type="button" onclick="login()">Login</button>
+        <button type="button" class="bypass" onclick="bypassLogin()">Masuk Tanpa Login</button>
+    </form>
+</div>
+
+<script>
+    function login() {
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        if (username === 'afrizal' && password === '221011401828') {
+            Swal.fire({
+                icon: 'success',
+                title: 'Login Berhasil',
+                text: 'Anda akan diarahkan ke dashboard.',
+                showConfirmButton: false,
+                timer: 2000,
+                didClose: () => {
+                    window.location.href = 'dashboard.html';
+                }
+            });
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Login Gagal',
+                text: 'Username atau Password salah',
+            });
+        }
+    }
+
+    function bypassLogin() {
+        Swal.fire({
+            icon: 'info',
+            title: 'Masuk Tanpa Login',
+            text: 'Anda akan diarahkan ke dashboard.',
+            showConfirmButton: false,
+            timer: 1500,
+            didClose: () => {
+                window.location.href = 'dashboard.html';
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

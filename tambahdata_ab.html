@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Data Absensi</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <img src="img/logotai.png" alt="Logo Perusahaan" class="logo">
+            <h2>Administrator</h2>
+            <hr>
+        </div>
+        
+        <!-- Menu Dashboard di Paling Atas -->
+        <ul class="dashboard-menu">
+            <li><a href="dashboard.html"><i class="fas fa-home"></i>Dashboard</a></li>
+        </ul>
+        
+        <!-- Konten Sidebar -->
+        <div class="sidebar-content">
+            <!-- Bagian Menu Karyawan -->
+            <ul class="menu-section">
+                <h3>Menu Karyawan</h3>
+                <li><a href="datakaryawan.html"><i class="fas fa-users"></i>Data Karyawan</a></li>
+                <li><a href="jabatan.html"><i class="fas fa-briefcase"></i>Jabatan</a></li>
+                <li><a href="divisi.html"><i class="fas fa-building"></i>Divisi</a></li>
+            </ul>
+            <hr class="section-divider">
+            
+            <!-- Bagian Menu Absensi -->
+            <ul class="menu-section">
+                <h3>Menu Absensi</h3>
+                <li><a href="absensi.html"><i class="fas fa-calendar-check"></i>Absensi</a></li>
+                <li><a href="izin.html"><i class="fas fa-clock"></i>Izin</a></li>
+                <li><a href="lembur.html"><i class="fas fa-business-time"></i>Lembur</a></li>
+            </ul>
+            <hr class="section-divider">
+            
+            <!-- Bagian Pengaturan dan Logout -->
+            <ul class="bottom-section">
+                <li><a href="#"><i class="fas fa-cog"></i>Pengaturan</a></li>
+                <li><a href="index.html"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="main-content">
+        <header>
+            <h1>Tambah Data Absensi</h1>
+        </header>
+        <div class="content">
+            <form id="attendanceForm">
+                <label for="nama">Nama:</label>
+                <input type="text" id="nama" required placeholder="Masukkan Nama">
+
+                <label for="tanggal">Tanggal:</label>
+                <input type="date" id="tanggal" required>
+
+                <label for="jamAbsen">Jam Absen:</label>
+                <input type="time" id="jamAbsen" required>
+
+                <label for="jamKeluar">Jam Keluar:</label>
+                <input type="time" id="jamKeluar" required>
+
+                <button type="submit">Simpan Data</button>
+                <a href="absensi.html" class="button-cancel">Batal</a>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('attendanceForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Mencegah pengiriman form default
+            
+            // Mengambil nilai dari form
+            const nama = document.getElementById('nama').value;
+            const tanggal = document.getElementById('tanggal').value;
+            const jamAbsen = document.getElementById('jamAbsen').value;
+            const jamKeluar = document.getElementById('jamKeluar').value;
+
+            // Membuat objek absensi
+            const absensi = {
+                nama: nama,
+                tanggal: tanggal,
+                jamAbsen: jamAbsen,
+                jamKeluar: jamKeluar
+            };
+
+            // Mendapatkan data absensi yang sudah ada di localStorage
+            let dataAbsensi = JSON.parse(localStorage.getItem('dataAbsensi')) || [];
+            dataAbsensi.push(absensi); // Menambahkan data baru ke array
+            localStorage.setItem('dataAbsensi', JSON.stringify(dataAbsensi)); // Menyimpan kembali ke localStorage
+
+            // Menampilkan alert sukses
+            alert("Data absensi berhasil disimpan!");
+            // Mengarahkan kembali ke halaman absensi
+            window.location.href = "absensi.html";
+        });
+    </script>
+</body>
+</html>
